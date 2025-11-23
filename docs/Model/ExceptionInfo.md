@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **exception_detail_list** | [**\NetSeven\KseF2Model\ExceptionDetails[]**](ExceptionDetails.md) |  | [optional]
-**reference_number** | **string** |  | [optional]
+**reference_number** | **string** | Numer referencyjny. | [optional]
 **service_code** | **string** |  | [optional]
 **service_ctx** | **string** |  | [optional]
 **service_name** | **string** |  | [optional]

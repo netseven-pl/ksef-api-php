@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**\NetSeven\KseF2Model\TestDataContextIdentifierType**](TestDataContextIdentifierType.md) |  | [optional]
-**value** | **string** |  | [optional]
+**type** | [**\NetSeven\KseF2Model\TestDataContextIdentifierType**](TestDataContextIdentifierType.md) |  |
+**value** | **string** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

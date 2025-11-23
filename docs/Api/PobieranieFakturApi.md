@@ -4,22 +4,21 @@ All URIs are relative to http://localhost, except if the operation defines anoth
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**apiV2InvoicesAsyncQueryOperationReferenceNumberGet()**](PobieranieFakturApi.md#apiV2InvoicesAsyncQueryOperationReferenceNumberGet) | **GET** /api/v2/invoices/async-query/{operationReferenceNumber} | [mock] Sprawdza status asynchronicznego zapytania o pobranie faktur |
-| [**apiV2InvoicesAsyncQueryPost()**](PobieranieFakturApi.md#apiV2InvoicesAsyncQueryPost) | **POST** /api/v2/invoices/async-query | [mock] Inicjalizuje asynchroniczne zapytanie o pobranie faktur |
-| [**apiV2InvoicesDownloadPost()**](PobieranieFakturApi.md#apiV2InvoicesDownloadPost) | **POST** /api/v2/invoices/download | [mock]Pobranie faktury  na podstawie numeru KSeF oraz danych faktury |
+| [**apiV2InvoicesExportsPost()**](PobieranieFakturApi.md#apiV2InvoicesExportsPost) | **POST** /api/v2/invoices/exports | Eksport paczki faktur |
+| [**apiV2InvoicesExportsReferenceNumberGet()**](PobieranieFakturApi.md#apiV2InvoicesExportsReferenceNumberGet) | **GET** /api/v2/invoices/exports/{referenceNumber} | Pobranie statusu eksportu paczki faktur |
 | [**apiV2InvoicesKsefKsefNumberGet()**](PobieranieFakturApi.md#apiV2InvoicesKsefKsefNumberGet) | **GET** /api/v2/invoices/ksef/{ksefNumber} | Pobranie faktury po numerze KSeF |
-| [**apiV2InvoicesQueryPost()**](PobieranieFakturApi.md#apiV2InvoicesQueryPost) | **POST** /api/v2/invoices/query | [mock] Pobranie listy metadanych faktur |
+| [**apiV2InvoicesQueryMetadataPost()**](PobieranieFakturApi.md#apiV2InvoicesQueryMetadataPost) | **POST** /api/v2/invoices/query/metadata | Pobranie listy metadanych faktur |
 
 
-## `apiV2InvoicesAsyncQueryOperationReferenceNumberGet()`
+## `apiV2InvoicesExportsPost()`
 
 ```php
-apiV2InvoicesAsyncQueryOperationReferenceNumberGet($operation_reference_number): \NetSeven\KseF2Model\AsyncInvoicesQueryStatus
+apiV2InvoicesExportsPost($invoice_export_request): \NetSeven\KseF2Model\ExportInvoicesResponse
 ```
 
-[mock] Sprawdza status asynchronicznego zapytania o pobranie faktur
+Eksport paczki faktur
 
-Pobiera status wcześniej zainicjalizowanego zapytania asynchronicznego na podstawie identyfikatora operacji.  Umożliwia śledzenie postępu przetwarzania zapytania oraz pobranie gotowych paczek z wynikami, jeśli są już dostępne.
+Rozpoczyna asynchroniczny proces wyszukiwania faktur w systemie KSeF na podstawie przekazanych filtrów oraz przygotowania ich w formie zaszyfrowanej paczki. Wymagane jest przekazanie informacji o szyfrowaniu w polu <b>Encryption</b>, które służą do zabezpieczenia przygotowanej paczki z fakturami. Maksymalnie można uruchomić 10 równoczesnych eksportów w zalogowanym kontekście.              System pobiera faktury rosnąco według daty określonej w filtrze (Invoicing, Issue, PermanentStorage) i dodaje faktury(nazwa pliku: <b>{ksefNumber}.xml</b>) do paczki aż do osiągnięcia jednego z poniższych limitów: * Limit liczby faktur: 10 000 sztuk * Limit rozmiaru danych(skompresowanych): 1GB  Paczka eksportu zawiera dodatkowy plik z metadanymi faktur w formacie JSON (`_metadata.json`). Zawartość pliku to obiekt z tablicą <b>invoices</b>, gdzie każdy element jest obiektem typu <b>InvoiceMetadata</b> (taki jak zwracany przez endpoint `POST /invoices/query/metadata`).  <b>Plik z metadanymi(_metadata.json) nie jest wliczany do limitów algorytmu budowania paczki</b>.   `Do realizacji pobierania przyrostowego należy stosować filtrowanie po dacie PermanentStorage`.  **Sortowanie:**  - permanentStorageDate | invoicingDate | issueDate (Asc) - pole wybierane na podstawie filtrów    **Wymagane uprawnienia**: `InvoiceRead`.
 
 ### Example
 
@@ -28,19 +27,23 @@ Pobiera status wcześniej zainicjalizowanego zapytania asynchronicznego na podst
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\PobieranieFakturApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$operation_reference_number = 'operation_reference_number_example'; // string | Unikalny identyfikator operacji zwrócony podczas inicjalizacji zapytania.
+$invoice_export_request = {"encryption":{"encryptedSymmetricKey":"Rk1Qb1VhVjMyQ3NxQ1h1WlVtZUdHcDJSZ0pTbE5IbWQ=","initializationVector":"c29tZUluaXRWZWN0b3I="},"filters":{"subjectType":"Subject1","dateRange":{"dateType":"Issue","from":"2025-08-28T09:22:13.388+00:00","to":"2025-09-28T09:22:13.388+00:00"}}}; // \NetSeven\KseF2Model\InvoiceExportRequest | Dane wejściowe określające kryteria i format eksportu paczki faktur.
 
 try {
-    $result = $apiInstance->apiV2InvoicesAsyncQueryOperationReferenceNumberGet($operation_reference_number);
+    $result = $apiInstance->apiV2InvoicesExportsPost($invoice_export_request);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesAsyncQueryOperationReferenceNumberGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesExportsPost: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -48,132 +51,80 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **operation_reference_number** | **string**| Unikalny identyfikator operacji zwrócony podczas inicjalizacji zapytania. | |
+| **invoice_export_request** | [**\NetSeven\KseF2Model\InvoiceExportRequest**](../Model/InvoiceExportRequest.md)| Dane wejściowe określające kryteria i format eksportu paczki faktur. | [optional] |
 
 ### Return type
 
-[**\NetSeven\KseF2Model\AsyncInvoicesQueryStatus**](../Model/AsyncInvoicesQueryStatus.md)
+[**\NetSeven\KseF2Model\ExportInvoicesResponse**](../Model/ExportInvoicesResponse.md)
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `apiV2InvoicesExportsReferenceNumberGet()`
+
+```php
+apiV2InvoicesExportsReferenceNumberGet($reference_number): \NetSeven\KseF2Model\InvoiceExportStatusResponse
+```
+
+Pobranie statusu eksportu paczki faktur
+
+Paczka faktur jest dzielona na części o maksymalnym rozmiarze 50 MB. Każda część jest zaszyfrowana algorytmem AES-256-CBC z dopełnieniem PKCS#7, przy użyciu klucza symetrycznego przekazanego podczas inicjowania eksportu.   W przypadku ucięcia wyniku eksportu z powodu przekroczenia limitów, zwracana jest flaga <b>IsTruncated = true</b> oraz odpowiednia data, którą należy wykorzystać do wykonania kolejnego eksportu, aż do momentu, gdy flaga <b>IsTruncated = false</b>.  **Sortowanie:**  - permanentStorageDate | invoicingDate | issueDate (Asc) - pole wybierane na podstawie filtrów    **Wymagane uprawnienia**: `InvoiceRead`.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new NetSeven\Api\PobieranieFakturApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$reference_number = 'reference_number_example'; // string | Numer referencyjny eksportu faktur.
+
+try {
+    $result = $apiInstance->apiV2InvoicesExportsReferenceNumberGet($reference_number);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesExportsReferenceNumberGet: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **reference_number** | **string**| Numer referencyjny eksportu faktur. | |
+
+### Return type
+
+[**\NetSeven\KseF2Model\InvoiceExportStatusResponse**](../Model/InvoiceExportStatusResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `apiV2InvoicesAsyncQueryPost()`
-
-```php
-apiV2InvoicesAsyncQueryPost($invoices_async_query_request): \NetSeven\KseF2Model\InitAsyncInvoicesQueryResponse
-```
-
-[mock] Inicjalizuje asynchroniczne zapytanie o pobranie faktur
-
-Rozpoczyna asynchroniczny proces wyszukiwania faktur w systemie KSeF na podstawie przekazanych filtrów.  Wymagane jest przekazanie informacji o szyfrowaniu w polu `Encryption`, które służą do zaszyfrowania wygenerowanych paczek z fakturami.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new NetSeven\Api\PobieranieFakturApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$invoices_async_query_request = new \NetSeven\KseF2Model\InvoicesAsyncQueryRequest(); // \NetSeven\KseF2Model\InvoicesAsyncQueryRequest | Zestaw filtrów dla wyszukiwania faktur.
-
-try {
-    $result = $apiInstance->apiV2InvoicesAsyncQueryPost($invoices_async_query_request);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesAsyncQueryPost: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **invoices_async_query_request** | [**\NetSeven\KseF2Model\InvoicesAsyncQueryRequest**](../Model/InvoicesAsyncQueryRequest.md)| Zestaw filtrów dla wyszukiwania faktur. | [optional] |
-
-### Return type
-
-[**\NetSeven\KseF2Model\InitAsyncInvoicesQueryResponse**](../Model/InitAsyncInvoicesQueryResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `apiV2InvoicesDownloadPost()`
-
-```php
-apiV2InvoicesDownloadPost($download_invoice_request): string
-```
-
-[mock]Pobranie faktury  na podstawie numeru KSeF oraz danych faktury
-
-Faktura zostanie zwrócona wyłącznie, jeśli wszystkie dane wejściowe są zgodne z danymi faktury w systemie.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new NetSeven\Api\PobieranieFakturApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$download_invoice_request = new \NetSeven\KseF2Model\DownloadInvoiceRequest(); // \NetSeven\KseF2Model\DownloadInvoiceRequest
-
-try {
-    $result = $apiInstance->apiV2InvoicesDownloadPost($download_invoice_request);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesDownloadPost: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **download_invoice_request** | [**\NetSeven\KseF2Model\DownloadInvoiceRequest**](../Model/DownloadInvoiceRequest.md)|  | [optional] |
-
-### Return type
-
-**string**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/xml`, `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -187,7 +138,7 @@ apiV2InvoicesKsefKsefNumberGet($ksef_number): string
 
 Pobranie faktury po numerze KSeF
 
-Zwraca fakturę o podanym numerze KSeF.
+Zwraca fakturę o podanym numerze KSeF.  **Wymagane uprawnienia**: `InvoiceRead`.
 
 ### Example
 
@@ -196,11 +147,15 @@ Zwraca fakturę o podanym numerze KSeF.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\PobieranieFakturApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $ksef_number = 'ksef_number_example'; // string | Numer KSeF faktury.
 
@@ -224,7 +179,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -235,15 +190,15 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `apiV2InvoicesQueryPost()`
+## `apiV2InvoicesQueryMetadataPost()`
 
 ```php
-apiV2InvoicesQueryPost($page_offset, $page_size, $invoices_query_request): \NetSeven\KseF2Model\QueryInvoicesReponse
+apiV2InvoicesQueryMetadataPost($sort_order, $page_offset, $page_size, $invoice_query_filters): \NetSeven\KseF2Model\QueryInvoicesMetadataResponse
 ```
 
-[mock] Pobranie listy metadanych faktur
+Pobranie listy metadanych faktur
 
-Zwraca listę metadanych faktur spełniające podane kryteria wyszukiwania.
+Zwraca metadane faktur spełniających filtry.  Limit techniczny: ≤ 10 000 rekordów na zestaw filtrów, po jego osiągnięciu <b>isTruncated = true</b> i należy ponownie ustawić <b>dateRange</b>, używając ostatniej daty z wyników (tj. ustawić from/to - w zależności od kierunku sortowania, od daty ostatniego zwróconego rekordu) oraz wyzerować <b>pageOffset</b>.  `Do scenariusza przyrostowego należy używać daty PermanentStorage oraz kolejność sortowania Asc`.              <b>Scenariusz pobierania przyrostowego (skrót):</b> * Gdy <b>hasMore = false</b>, należy zakończyć, * Gdy <b>hasMore = true</b> i <b>isTruncated = false</b>, należy zwiększyć <b>pageOffset</b>, * Gdy <b>hasMore = true</b> i <b>isTruncated = true</b>, należy zawęzić <b>dateRange</b> (ustawić from od daty ostatniego rekordu), wyzerować <b>pageOffset</b> i kontynuować  **Sortowanie:**  - permanentStorageDate | invoicingDate | issueDate (Asc | Desc) - pole wybierane na podstawie filtrów    **Wymagane uprawnienia**: `InvoiceRead`.
 
 ### Example
 
@@ -252,21 +207,26 @@ Zwraca listę metadanych faktur spełniające podane kryteria wyszukiwania.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\PobieranieFakturApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$page_offset = 56; // int | Indeks pierwszej strony wyników (domyślnie 0).
-$page_size = 56; // int | Rozmiar strony wyników(domyślnie 10).
-$invoices_query_request = new \NetSeven\KseF2Model\InvoicesQueryRequest(); // \NetSeven\KseF2Model\InvoicesQueryRequest | Zestaw filtrów dla wyszukiwania metadanych.
+$sort_order = new \NetSeven\KseF2Model\\NetSevenKseF2ModelSortOrder(); // \NetSevenKseF2ModelSortOrder | Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. |
+$page_offset = 0; // int | Indeks pierwszej strony wyników (0 = pierwsza strona).
+$page_size = 10; // int | Rozmiar strony wyników.
+$invoice_query_filters = {"subjectType":"Subject1","dateRange":{"dateType":"PermanentStorage","from":"2025-08-28T09:22:13.388+00:00","to":"2025-09-28T09:22:13.388+00:00"},"amount":{"type":"Brutto","from":100.5,"to":250.0},"currencyCodes":["PLN","EUR"],"invoicingMode":"Online","formType":"FA","invoiceTypes":["Vat"],"hasAttachment":true}; // \NetSeven\KseF2Model\InvoiceQueryFilters | Kryteria filtrowania.
 
 try {
-    $result = $apiInstance->apiV2InvoicesQueryPost($page_offset, $page_size, $invoices_query_request);
+    $result = $apiInstance->apiV2InvoicesQueryMetadataPost($sort_order, $page_offset, $page_size, $invoice_query_filters);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesQueryPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PobieranieFakturApi->apiV2InvoicesQueryMetadataPost: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -274,17 +234,18 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page_offset** | **int**| Indeks pierwszej strony wyników (domyślnie 0). | [optional] |
-| **page_size** | **int**| Rozmiar strony wyników(domyślnie 10). | [optional] |
-| **invoices_query_request** | [**\NetSeven\KseF2Model\InvoicesQueryRequest**](../Model/InvoicesQueryRequest.md)| Zestaw filtrów dla wyszukiwania metadanych. | [optional] |
+| **sort_order** | [**\NetSevenKseF2ModelSortOrder**](../Model/.md)| Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | | [optional] |
+| **page_offset** | **int**| Indeks pierwszej strony wyników (0 &#x3D; pierwsza strona). | [optional] [default to 0] |
+| **page_size** | **int**| Rozmiar strony wyników. | [optional] [default to 10] |
+| **invoice_query_filters** | [**\NetSeven\KseF2Model\InvoiceQueryFilters**](../Model/InvoiceQueryFilters.md)| Kryteria filtrowania. | [optional] |
 
 ### Return type
 
-[**\NetSeven\KseF2Model\QueryInvoicesReponse**](../Model/QueryInvoicesReponse.md)
+[**\NetSeven\KseF2Model\QueryInvoicesMetadataResponse**](../Model/QueryInvoicesMetadataResponse.md)
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 

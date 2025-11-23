@@ -16,7 +16,7 @@ apiV2PermissionsAuthorizationsGrantsPermissionIdDelete($permission_id): \NetSeve
 
 Odebranie uprawnień podmiotowych
 
-Rozpoczyna asynchroniczną operacje odbierania uprawnienia o podanym identyfikatorze.  Ta metoda służy do odbierania uprawnień podmiotowych.    > Więcej informacji:  > - [Odbieranie uprawnień](https://github.com/CIRFMF/ksef-docs/blob/main/uprawnienia.md#odebranie-uprawnie%C5%84-podmiotowych)
+Metoda pozwala na odebranie uprawnienia podmiotowego o wskazanym identyfikatorze.   Wymagane jest wcześniejsze odczytanie uprawnień w celu uzyskania   identyfikatora uprawnienia, które ma zostać odebrane.              > Więcej informacji: > - [Odbieranie uprawnień](https://github.com/CIRFMF/ksef-docs/blob/main/uprawnienia.md#odebranie-uprawnie%C5%84-podmiotowych)  **Wymagane uprawnienia**: `CredentialsManage`.
 
 ### Example
 
@@ -25,11 +25,15 @@ Rozpoczyna asynchroniczną operacje odbierania uprawnienia o podanym identyfikat
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\OdbieranieUprawnieApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $permission_id = 'permission_id_example'; // string | Id uprawnienia.
 
@@ -53,7 +57,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -72,7 +76,7 @@ apiV2PermissionsCommonGrantsPermissionIdDelete($permission_id): \NetSeven\KseF2M
 
 Odebranie uprawnień
 
-Rozpoczyna asynchroniczną operacje odbierania uprawnienia o podanym identyfikatorze.    Ta metoda służy do odbierania uprawnień takich jak:  - nadanych nadanych osobom fizycznym lub podmiotom do pracy w KSeF  - nadanych podmiotom do obsługi faktur  - nadanych w sposób pośredni  - administratorów jednostek i podmiotów podrzędnych  - administratorów podmiotów unijnych uprawnionych do samofakturowania  - reprezentantów podmiotów unijnych    > Więcej informacji:  > - [Odbieranie uprawnień](https://github.com/CIRFMF/ksef-docs/blob/main/uprawnienia.md#odebranie-uprawnie%C5%84)
+Metoda pozwala na odebranie uprawnienia o wskazanym identyfikatorze.   Wymagane jest wcześniejsze odczytanie uprawnień w celu uzyskania   identyfikatora uprawnienia, które ma zostać odebrane.  > Więcej informacji: > - [Odbieranie uprawnień](https://github.com/CIRFMF/ksef-docs/blob/main/uprawnienia.md#odebranie-uprawnie%C5%84)  **Wymagane uprawnienia**: `CredentialsManage`, `VatUeManage`, `SubunitManage`.
 
 ### Example
 
@@ -81,11 +85,15 @@ Rozpoczyna asynchroniczną operacje odbierania uprawnienia o podanym identyfikat
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\OdbieranieUprawnieApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $permission_id = 'permission_id_example'; // string | Id uprawnienia.
 
@@ -109,7 +117,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 

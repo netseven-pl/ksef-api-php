@@ -4,14 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identyfikator uprawnienia. | [optional]
-**author_identifier** | **string** | Identyfikator uprawniającego. | [optional]
-**author_identifier_type** | [**\NetSeven\KseF2Model\EuEntityPermissionsAuthorIdentifierType**](EuEntityPermissionsAuthorIdentifierType.md) | Typ identyfikatora uprawniającego. | [optional]
-**vat_ue_identifier** | **string** | Identyfikator podmiotu unijnego. | [optional]
-**eu_entity_name** | **string** | Nazwa podmiotu unijnego. | [optional]
-**authorized_fingerprint_identifier** | **string** | Uprawniony odcisk palca certyfikatu. | [optional]
-**permission_scope** | [**\NetSeven\KseF2Model\EuEntityPermissionsQueryPermissionType**](EuEntityPermissionsQueryPermissionType.md) | Uprawnienie. | [optional]
-**description** | **string** | Opis uprawnienia. | [optional]
-**start_date** | **\DateTime** | Data rozpoczęcia obowiązywania uprawnienia. | [optional]
+**id** | **string** | Identyfikator uprawnienia. |
+**author_identifier** | [**\NetSeven\KseF2Model\EuEntityPermissionsAuthorIdentifier**](EuEntityPermissionsAuthorIdentifier.md) | Identyfikator uprawniającego. | Type | Value | | --- | --- | | Nip | 10 cyfrowy numer NIP | | Pesel | 11 cyfrowy numer PESEL | | Fingerprint | Odcisk palca certyfikatu | |
+**vat_ue_identifier** | **string** | Identyfikator podmiotu unijnego. |
+**eu_entity_name** | **string** | Nazwa podmiotu unijnego. |
+**authorized_fingerprint_identifier** | **string** | Uprawniony odcisk palca certyfikatu. |
+**permission_scope** | [**\NetSeven\KseF2Model\EuEntityPermissionsQueryPermissionType**](EuEntityPermissionsQueryPermissionType.md) | Uprawnienie. |
+**description** | **string** | Opis uprawnienia. |
+**start_date** | **\DateTime** | Data rozpoczęcia obowiązywania uprawnienia. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -73,7 +73,7 @@ apiV2AuthKsefTokenPost($init_token_authentication_request): \NetSeven\KseF2Model
 
 Uwierzytelnienie z wykorzystaniem tokena KSeF
 
-Rozpoczyna operację uwierzytelniania z wykorzystaniem wcześniej wygenerowanego tokena KSeF.    Token KSeF wraz z timestampem ze wcześniej wygenerowanego challenge'a (w formacie ```token|timestamp```) powinien zostać zaszyfrowany dedykowanym do tego celu kluczem publicznym.  - Timestamp powinien zostać przekazany jako **liczba milisekund od 1 stycznia 1970 roku (Unix timestamp)**.  - Algorytm szyfrowania: **RSA-OAEP (z użyciem SHA-256 jako funkcji skrótu)**.
+Rozpoczyna operację uwierzytelniania z wykorzystaniem wcześniej wygenerowanego tokena KSeF.  Token KSeF wraz z timestampem ze wcześniej wygenerowanego challenge'a (w formacie ```token|timestamp```) powinien zostać zaszyfrowany dedykowanym do tego celu kluczem publicznym. - Timestamp powinien zostać przekazany jako **liczba milisekund od 1 stycznia 1970 roku (Unix timestamp)**. - Algorytm szyfrowania: **RSA-OAEP (z użyciem SHA-256 jako funkcji skrótu)**.
 
 ### Example
 
@@ -129,7 +129,7 @@ apiV2AuthReferenceNumberGet($reference_number): \NetSeven\KseF2Model\Authenticat
 
 Pobranie statusu uwierzytelniania
 
-Sprawdza bieżący status operacji uwierzytelniania dla podanego tokena.    Sposób uwierzytelnienia: `AuthenticationToken` otrzymany przy rozpoczęciu operacji uwierzytelniania.
+Sprawdza bieżący status operacji uwierzytelniania dla podanego tokena.  Sposób uwierzytelnienia: `AuthenticationToken` otrzymany przy rozpoczęciu operacji uwierzytelniania.
 
 ### Example
 
@@ -138,11 +138,15 @@ Sprawdza bieżący status operacji uwierzytelniania dla podanego tokena.    Spos
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\UzyskiwanieDostpuApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny tokena otrzymanego przy inicjalizacji operacji uwierzytelniania.
 
@@ -166,7 +170,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -185,7 +189,7 @@ apiV2AuthTokenRedeemPost(): \NetSeven\KseF2Model\AuthenticationTokensResponse
 
 Pobranie tokenów dostępowych
 
-Pobiera parę tokenów (access token i refresh token) wygenerowanych w ramach pozytywnie zakończonego procesu uwierzytelniania.  **Tokeny można pobrać tylko raz.**    Sposób uwierzytelnienia: `AuthenticationToken` otrzymany przy rozpoczęciu operacji uwierzytelniania.
+Pobiera parę tokenów (access token i refresh token) wygenerowanych w ramach pozytywnie zakończonego procesu uwierzytelniania. **Tokeny można pobrać tylko raz.**  Sposób uwierzytelnienia: `AuthenticationToken` otrzymany przy rozpoczęciu operacji uwierzytelniania.
 
 ### Example
 
@@ -194,11 +198,15 @@ Pobiera parę tokenów (access token i refresh token) wygenerowanych w ramach po
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\UzyskiwanieDostpuApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 
 try {
@@ -219,7 +227,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -238,7 +246,7 @@ apiV2AuthTokenRefreshPost(): \NetSeven\KseF2Model\AuthenticationTokenRefreshResp
 
 Odświeżenie tokena dostępowego
 
-Generuje nowy token dostępu na podstawie ważnego refresh tokena.    Sposób uwierzytelnienia: `RefreshToken`.
+Generuje nowy token dostępu na podstawie ważnego refresh tokena.  Sposób uwierzytelnienia: `RefreshToken`.
 
 ### Example
 
@@ -247,11 +255,15 @@ Generuje nowy token dostępu na podstawie ważnego refresh tokena.    Sposób uw
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\UzyskiwanieDostpuApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 
 try {
@@ -272,7 +284,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -291,7 +303,7 @@ apiV2AuthXadesSignaturePost($body, $verify_certificate_chain): \NetSeven\KseF2Mo
 
 Uwierzytelnienie z wykorzystaniem podpisu XAdES
 
-Rozpoczyna operację uwierzytelniania za pomocą dokumentu XML podpisanego podpisem elektroniczny XAdES.    > Więcej informacji:  > - [Przygotowanie dokumentu XML](https://github.com/CIRFMF/ksef-docs/blob/main/uwierzytelnianie.md#1-przygotowanie-dokumentu-xml-authtokenrequest)  > - [Podpis dokumentu XML](https://github.com/CIRFMF/ksef-docs/blob/main/uwierzytelnianie.md#2-podpisanie-dokumentu-xades)  > - [Schemat XSD](/docs/v2/schemas/authv2.xsd)
+Rozpoczyna operację uwierzytelniania za pomocą dokumentu XML podpisanego podpisem elektronicznym XAdES.  > Więcej informacji: > - [Przygotowanie dokumentu XML](https://github.com/CIRFMF/ksef-docs/blob/main/uwierzytelnianie.md#1-przygotowanie-dokumentu-xml-authtokenrequest) > - [Podpis dokumentu XML](https://github.com/CIRFMF/ksef-docs/blob/main/uwierzytelnianie.md#2-podpisanie-dokumentu-xades) > - [Schemat XSD](/docs/v2/schemas/authv2.xsd)
 
 ### Example
 
@@ -310,8 +322,7 @@ $body = <?xml version="1.0" encoding="utf-8"?>
 <AuthTokenRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ksef.mf.gov.pl/auth/token/2.0">
     <Challenge>20250625-CR-20F5EE4000-DA48AE4124-46</Challenge>
     <ContextIdentifier>
-        <Type>nip</Type>
-        <Value>5265877635</Value>
+        <Nip>5265877635</Nip>
     </ContextIdentifier>
     <SubjectIdentifierType>certificateSubject</SubjectIdentifierType>
     <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="Signature-9707709">

@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**operation_reference_number** | **string** | Numer referencyjny asynchronicznej operacji nadawania lub odbierania uprawnień. | [optional]
+**reference_number** | **string** | Numer referencyjny operacji nadania lub odbierania uprawnień. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

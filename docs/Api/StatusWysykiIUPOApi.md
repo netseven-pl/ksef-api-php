@@ -22,7 +22,7 @@ apiV2SessionsGet($session_type, $page_size, $reference_number, $date_created_fro
 
 Pobranie listy sesji
 
-Zwraca listę sesji spełniających podane kryteria wyszukiwania.
+Zwraca listę sesji spełniających podane kryteria wyszukiwania.    **Sortowanie:**  - dateCreated (Desc)   **Wymagane uprawnienia**: - `Introspection` – pozwala pobrać wszystkie sesje w bieżącym kontekście uwierzytelnienia `(ContextIdentifier)`. - `InvoiceWrite` – pozwala pobrać wyłącznie sesje utworzone przez podmiot uwierzytelniający, czyli podmiot inicjujący uwierzytelnienie.
 
 ### Example
 
@@ -31,14 +31,18 @@ Zwraca listę sesji spełniających podane kryteria wyszukiwania.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
-$session_type = 'session_type_example'; // \NetSevenKseF2ModelSessionType | Typ sesji.  | Wartość | Opis |  | --- | --- |  | Online | Wysyłka interaktywna (pojedyncze faktury). |  | Batch | Wysyłka wsadowa (paczka faktur). |
-$page_size = 56; // int | Rozmiar strony.
+$session_type = new \NetSeven\KseF2Model\\NetSevenKseF2ModelSessionType(); // \NetSevenKseF2ModelSessionType | Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). |
+$page_size = 10; // int | Rozmiar strony.
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 $date_created_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Data utworzenia sesji (od).
 $date_created_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Data utworzenia sesji (do).
@@ -46,7 +50,7 @@ $date_closed_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | D
 $date_closed_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Data zamknięcia sesji (do).
 $date_modified_from = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Data ostatniej aktywności (wysyłka faktury lub zmiana statusu) w ramach sesji (od).
 $date_modified_to = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Data ostatniej aktywności (wysyłka faktury lub zmiana statusu) w ramach sesji (do).
-$statuses = array(new \NetSeven\KseF2Model\\NetSeven\KseF2Model\CommonSessionStatus()); // \NetSeven\KseF2Model\CommonSessionStatus[] | Statusy sesji.  | Wartość | Opis |  | --- | --- |  | Succeeded | Sesja przetworzona poprawnie.            W trakcie przetwarzania sesji nie wystąpiły żadne błędy, ale część faktur nadal mogła zostać odrzucona. |  | InProgress | Sesja aktywna. |  | Failed | Sesja nie przetworzona z powodu błędów.            Na etapie rozpoczynania lub kończenia sesji wystąpiły błędy, które nie pozwoliły na jej poprawne przetworzenie. |
+$statuses = array(new \NetSeven\KseF2Model\\NetSeven\KseF2Model\CommonSessionStatus()); // \NetSeven\KseF2Model\CommonSessionStatus[] | Statusy sesji. | Wartość | Opis | | --- | --- | | InProgress | Sesja aktywna. | | Succeeded | Sesja przetworzona poprawnie.            W trakcie przetwarzania sesji nie wystąpiły żadne błędy, ale część faktur nadal mogła zostać odrzucona. | | Failed | Sesja nie przetworzona z powodu błędów.            Na etapie rozpoczynania lub kończenia sesji wystąpiły błędy, które nie pozwoliły na jej poprawne przetworzenie. | | Cancelled | Sesja anulowania.            Został przekroczony czas na wysyłkę w sesji wsadowej, lub nie przesłano żadnych faktur w sesji interaktywnej. |
 $x_continuation_token = 'x_continuation_token_example'; // string | Token służący do pobrania kolejnej strony wyników.
 
 try {
@@ -61,8 +65,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **session_type** | **\NetSevenKseF2ModelSessionType**| Typ sesji.  | Wartość | Opis |  | --- | --- |  | Online | Wysyłka interaktywna (pojedyncze faktury). |  | Batch | Wysyłka wsadowa (paczka faktur). | | |
-| **page_size** | **int**| Rozmiar strony. | [optional] |
+| **session_type** | [**\NetSevenKseF2ModelSessionType**](../Model/.md)| Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | | |
+| **page_size** | **int**| Rozmiar strony. | [optional] [default to 10] |
 | **reference_number** | **string**| Numer referencyjny sesji. | [optional] |
 | **date_created_from** | **\DateTime**| Data utworzenia sesji (od). | [optional] |
 | **date_created_to** | **\DateTime**| Data utworzenia sesji (do). | [optional] |
@@ -70,7 +74,7 @@ try {
 | **date_closed_to** | **\DateTime**| Data zamknięcia sesji (do). | [optional] |
 | **date_modified_from** | **\DateTime**| Data ostatniej aktywności (wysyłka faktury lub zmiana statusu) w ramach sesji (od). | [optional] |
 | **date_modified_to** | **\DateTime**| Data ostatniej aktywności (wysyłka faktury lub zmiana statusu) w ramach sesji (do). | [optional] |
-| **statuses** | [**\NetSeven\KseF2Model\CommonSessionStatus[]**](../Model/\NetSeven\KseF2Model\CommonSessionStatus.md)| Statusy sesji.  | Wartość | Opis |  | --- | --- |  | Succeeded | Sesja przetworzona poprawnie.            W trakcie przetwarzania sesji nie wystąpiły żadne błędy, ale część faktur nadal mogła zostać odrzucona. |  | InProgress | Sesja aktywna. |  | Failed | Sesja nie przetworzona z powodu błędów.            Na etapie rozpoczynania lub kończenia sesji wystąpiły błędy, które nie pozwoliły na jej poprawne przetworzenie. | | [optional] |
+| **statuses** | [**\NetSeven\KseF2Model\CommonSessionStatus[]**](../Model/\NetSeven\KseF2Model\CommonSessionStatus.md)| Statusy sesji. | Wartość | Opis | | --- | --- | | InProgress | Sesja aktywna. | | Succeeded | Sesja przetworzona poprawnie.            W trakcie przetwarzania sesji nie wystąpiły żadne błędy, ale część faktur nadal mogła zostać odrzucona. | | Failed | Sesja nie przetworzona z powodu błędów.            Na etapie rozpoczynania lub kończenia sesji wystąpiły błędy, które nie pozwoliły na jej poprawne przetworzenie. | | Cancelled | Sesja anulowania.            Został przekroczony czas na wysyłkę w sesji wsadowej, lub nie przesłano żadnych faktur w sesji interaktywnej. | | [optional] |
 | **x_continuation_token** | **string**| Token służący do pobrania kolejnej strony wyników. | [optional] |
 
 ### Return type
@@ -79,7 +83,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -98,7 +102,7 @@ apiV2SessionsReferenceNumberGet($reference_number): \NetSeven\KseF2Model\Session
 
 Pobranie statusu sesji
 
-Sprawdza bieżący status sesji o podanym numerze referencyjnym.
+Sprawdza bieżący status sesji o podanym numerze referencyjnym.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -107,11 +111,15 @@ Sprawdza bieżący status sesji o podanym numerze referencyjnym.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 
@@ -135,7 +143,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -154,7 +162,7 @@ apiV2SessionsReferenceNumberInvoicesFailedGet($reference_number, $x_continuation
 
 Pobranie niepoprawnie przetworzonych faktur sesji
 
-Zwraca listę niepoprawnie przetworzonych faktur przesłanych w sesji wraz z ich statusami.
+Zwraca listę niepoprawnie przetworzonych faktur przesłanych w sesji wraz z ich statusami.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -163,11 +171,15 @@ Zwraca listę niepoprawnie przetworzonych faktur przesłanych w sesji wraz z ich
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 $x_continuation_token = 'x_continuation_token_example'; // string | Token służący do pobrania kolejnej strony wyników.
@@ -195,7 +207,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -209,12 +221,12 @@ No authorization required
 ## `apiV2SessionsReferenceNumberInvoicesGet()`
 
 ```php
-apiV2SessionsReferenceNumberInvoicesGet($reference_number, $page_offset, $page_size): \NetSeven\KseF2Model\SessionInvoicesResponse
+apiV2SessionsReferenceNumberInvoicesGet($reference_number, $x_continuation_token, $page_size): \NetSeven\KseF2Model\SessionInvoicesResponse
 ```
 
 Pobranie faktur sesji
 
-Zwraca listę faktur przesłanych w sesji wraz z ich statusami, oraz informacje na temat ilości poprawnie i niepoprawnie przetworzonych faktur.
+Zwraca listę faktur przesłanych w sesji wraz z ich statusami, oraz informacje na temat ilości poprawnie i niepoprawnie przetworzonych faktur.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -223,18 +235,22 @@ Zwraca listę faktur przesłanych w sesji wraz z ich statusami, oraz informacje 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
-$page_offset = 0; // int | Numer strony wyników.
+$x_continuation_token = 'x_continuation_token_example'; // string | Token służący do pobrania kolejnej strony wyników.
 $page_size = 10; // int | Rozmiar strony wyników.
 
 try {
-    $result = $apiInstance->apiV2SessionsReferenceNumberInvoicesGet($reference_number, $page_offset, $page_size);
+    $result = $apiInstance->apiV2SessionsReferenceNumberInvoicesGet($reference_number, $x_continuation_token, $page_size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StatusWysykiIUPOApi->apiV2SessionsReferenceNumberInvoicesGet: ', $e->getMessage(), PHP_EOL;
@@ -246,7 +262,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **reference_number** | **string**| Numer referencyjny sesji. | |
-| **page_offset** | **int**| Numer strony wyników. | [optional] [default to 0] |
+| **x_continuation_token** | **string**| Token służący do pobrania kolejnej strony wyników. | [optional] |
 | **page_size** | **int**| Rozmiar strony wyników. | [optional] [default to 10] |
 
 ### Return type
@@ -255,7 +271,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -269,12 +285,12 @@ No authorization required
 ## `apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet()`
 
 ```php
-apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet($reference_number, $invoice_reference_number): \NetSeven\KseF2Model\InvoiceStatusResponse
+apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet($reference_number, $invoice_reference_number): \NetSeven\KseF2Model\SessionInvoiceStatusResponse
 ```
 
 Pobranie statusu faktury z sesji
 
-Zwraca fakturę przesłaną w sesji wraz ze statusem.
+Zwraca fakturę przesłaną w sesji wraz ze statusem.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -283,11 +299,15 @@ Zwraca fakturę przesłaną w sesji wraz ze statusem.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 $invoice_reference_number = 'invoice_reference_number_example'; // string | Numer referencyjny faktury.
@@ -309,11 +329,11 @@ try {
 
 ### Return type
 
-[**\NetSeven\KseF2Model\InvoiceStatusResponse**](../Model/InvoiceStatusResponse.md)
+[**\NetSeven\KseF2Model\SessionInvoiceStatusResponse**](../Model/SessionInvoiceStatusResponse.md)
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -332,7 +352,7 @@ apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet($reference_numb
 
 Pobranie UPO faktury z sesji na podstawie numeru referencyjnego faktury
 
-Zwraca UPO faktury przesłanego w sesji na podstawie jego numeru KSeF.
+Zwraca UPO faktury przesłanego w sesji na podstawie jego numeru KSeF.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -341,11 +361,15 @@ Zwraca UPO faktury przesłanego w sesji na podstawie jego numeru KSeF.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 $invoice_reference_number = 'invoice_reference_number_example'; // string | Numer referencyjny faktury.
@@ -371,7 +395,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -390,7 +414,7 @@ apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet($reference_number, $kse
 
 Pobranie UPO faktury z sesji na podstawie numeru KSeF
 
-Zwraca UPO faktury przesłanego w sesji na podstawie jego numeru KSeF.
+Zwraca UPO faktury przesłanego w sesji na podstawie jego numeru KSeF.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -399,11 +423,15 @@ Zwraca UPO faktury przesłanego w sesji na podstawie jego numeru KSeF.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 $ksef_number = 'ksef_number_example'; // string | Numer KSeF faktury.
@@ -429,7 +457,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -448,7 +476,7 @@ apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet($reference_number, $upo_ref
 
 Pobranie UPO dla sesji
 
-Zwraca XML zawierający zbiorcze UPO dla sesji.
+Zwraca XML zawierający zbiorcze UPO dla sesji.  **Wymagane uprawnienia**: `InvoiceWrite`, `Introspection`, `PefInvoiceWrite`.
 
 ### Example
 
@@ -457,11 +485,15 @@ Zwraca XML zawierający zbiorcze UPO dla sesji.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\StatusWysykiIUPOApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji.
 $upo_reference_number = 'upo_reference_number_example'; // string | Numer referencyjny UPO.
@@ -487,7 +519,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 

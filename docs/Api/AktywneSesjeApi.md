@@ -17,7 +17,7 @@ apiV2AuthSessionsCurrentDelete()
 
 Unieważnienie aktualnej sesji uwierzytelnienia
 
-Unieważnia sesję powiązaną z tokenem użytym do wywołania tej operacji.    Unieważnienie sesji sprawia, że powiązany z nią refresh token przestaje działać i nie można już za jego pomocą uzyskać kolejnych access tokenów.  **Aktywne access tokeny działają do czasu minięcia ich termin ważności.**    Sposób uwierzytelnienia: `RefreshToken` lub `AccessToken`.
+Unieważnia sesję powiązaną z tokenem użytym do wywołania tej operacji.  Unieważnienie sesji sprawia, że powiązany z nią refresh token przestaje działać i nie można już za jego pomocą uzyskać kolejnych access tokenów. **Aktywne access tokeny działają do czasu minięcia ich termin ważności.**  Sposób uwierzytelnienia: `RefreshToken` lub `AccessToken`.
 
 ### Example
 
@@ -26,11 +26,15 @@ Unieważnia sesję powiązaną z tokenem użytym do wywołania tej operacji.    
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\AktywneSesjeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 
 try {
@@ -50,7 +54,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -69,7 +73,7 @@ apiV2AuthSessionsGet($x_continuation_token, $page_size): \NetSeven\KseF2Model\Au
 
 Pobranie listy aktywnych sesji
 
-Zwraca listę aktywnych sesji uwierzytelnienia.
+Zwraca listę aktywnych sesji uwierzytelnienia.  **Sortowanie:**  - startDate (Desc)
 
 ### Example
 
@@ -78,11 +82,15 @@ Zwraca listę aktywnych sesji uwierzytelnienia.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\AktywneSesjeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $x_continuation_token = 'x_continuation_token_example'; // string | Token służący do pobrania kolejnej strony wyników.
 $page_size = 10; // int | Rozmiar strony wyników.
@@ -108,7 +116,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 
@@ -127,7 +135,7 @@ apiV2AuthSessionsReferenceNumberDelete($reference_number)
 
 Unieważnienie sesji uwierzytelnienia
 
-Unieważnia sesję o podanym numerze referencyjnym.    Unieważnienie sesji sprawia, że powiązany z nią refresh token przestaje działać i nie można już za jego pomocą uzyskać kolejnych access tokenów.  **Aktywne access tokeny działają do czasu minięcia ich termin ważności.**
+Unieważnia sesję o podanym numerze referencyjnym.  Unieważnienie sesji sprawia, że powiązany z nią refresh token przestaje działać i nie można już za jego pomocą uzyskać kolejnych access tokenów. **Aktywne access tokeny działają do czasu minięcia ich termin ważności.**
 
 ### Example
 
@@ -136,11 +144,15 @@ Unieważnia sesję o podanym numerze referencyjnym.    Unieważnienie sesji spra
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer (JWT) authorization: Bearer
+$config = NetSeven\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new NetSeven\Api\AktywneSesjeApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $reference_number = 'reference_number_example'; // string | Numer referencyjny sesji uwierzytelnienia.
 
@@ -163,7 +175,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[Bearer](../../README.md#Bearer)
 
 ### HTTP request headers
 

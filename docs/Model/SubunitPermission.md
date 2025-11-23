@@ -4,15 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identyfikator uprawnienia. | [optional]
-**authorized_identifier** | **string** | Identyfikator uprawnionego. | [optional]
-**authorized_identifier_type** | [**\NetSeven\KseF2Model\SubunitPermissionsSubjectIdentifierType**](SubunitPermissionsSubjectIdentifierType.md) | Typ identyfikatora uprawnionego. | [optional]
-**subunit_identifier** | **string** | Identyfikator podmiotu podrzędnego. | [optional]
-**subunit_identifier_type** | [**\NetSeven\KseF2Model\SubunitPermissionsSubunitIdentifierType**](SubunitPermissionsSubunitIdentifierType.md) | Typ identyfikatora podmiotu podrzędnego. | [optional]
-**author_identifier** | **string** | Identyfikator uprawniającego. | [optional]
-**author_identifier_type** | [**\NetSeven\KseF2Model\SubunitPermissionsAuthorIdentifierType**](SubunitPermissionsAuthorIdentifierType.md) | Typ identyfikatora uprawniającego. | [optional]
-**permission_scope** | [**\NetSeven\KseF2Model\SubunitPermissionScope**](SubunitPermissionScope.md) | Uprawnienie. | [optional]
-**description** | **string** | Opis uprawnienia. | [optional]
-**start_date** | **\DateTime** | Data rozpoczęcia obowiązywania uprawnienia. | [optional]
+**id** | **string** | Identyfikator uprawnienia. |
+**authorized_identifier** | [**\NetSeven\KseF2Model\SubunitPermissionsAuthorizedIdentifier**](SubunitPermissionsAuthorizedIdentifier.md) | Identyfikator uprawnionego. | Type | Value | | --- | --- | | Nip | 10 cyfrowy numer NIP | | Pesel | 11 cyfrowy numer PESEL | | Fingerprint | Odcisk palca certyfikatu | |
+**subunit_identifier** | [**\NetSeven\KseF2Model\SubunitPermissionsSubunitIdentifier**](SubunitPermissionsSubunitIdentifier.md) | Identyfikator jednostki lub podmiotu podrzędnego. | Type | Value | | --- | --- | | InternalId | Dwuczłonowy identyfikator składający się z numeru NIP i 5 cyfr: &#x60;{nip}-{5_cyfr}&#x60; | | Nip | 10 cyfrowy numer NIP | |
+**author_identifier** | [**\NetSeven\KseF2Model\SubunitPermissionsAuthorIdentifier**](SubunitPermissionsAuthorIdentifier.md) | Identyfikator uprawniającego. | Type | Value | | --- | --- | | Nip | 10 cyfrowy numer NIP | | Pesel | 11 cyfrowy numer PESEL | | Fingerprint | Odcisk palca certyfikatu | |
+**permission_scope** | [**\NetSeven\KseF2Model\SubunitPermissionScope**](SubunitPermissionScope.md) | Rodzaj uprawnienia. |
+**description** | **string** | Opis uprawnienia. |
+**subunit_name** | **string** | Nazwa jednostki podrzędnej. | [optional]
+**start_date** | **\DateTime** | Data rozpoczęcia obowiązywania uprawnienia. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

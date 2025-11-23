@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **invoice_hash** | **string** | Skrót SHA256 oryginalnej faktury, zakodowany w formacie Base64. |
-**invoice_size** | **int** | Rozmiar oryginalnej faktury w bajtach. |
+**invoice_size** | **int** | Rozmiar oryginalnej faktury w bajtach. Maksymalny rozmiar zależy od limitów ustawionych dla uwierzytelnionego kontekstu. |
 **encrypted_invoice_hash** | **string** | Skrót SHA256 zaszyfrowanej faktury, zakodowany w formacie Base64. |
 **encrypted_invoice_size** | **int** | Rozmiar zaszyfrowanej faktury w bajtach. |
 **encrypted_invoice_content** | **string** | Faktura zaszyfrowana algorytmem AES-256-CBC z dopełnianiem PKCS#7 (kluczem przekazanym przy otwarciu sesji), zakodowana w formacie Base64. |
