@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PobieranieFakturApi
  * PHP version 8.1
@@ -149,8 +150,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsPost(
         ?\NetSeven\KseF2Model\InvoiceExportRequest $invoice_export_request = null,
         string $contentType = self::contentTypes['apiV2InvoicesExportsPost'][0]
-    ): \NetSeven\KseF2Model\ExportInvoicesResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\ExportInvoicesResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2InvoicesExportsPostWithHttpInfo($invoice_export_request, $contentType);
         return $response;
     }
@@ -170,8 +170,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsPostWithHttpInfo(
         ?\NetSeven\KseF2Model\InvoiceExportRequest $invoice_export_request = null,
         string $contentType = self::contentTypes['apiV2InvoicesExportsPost'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2InvoicesExportsPostRequest($invoice_export_request, $contentType);
 
         try {
@@ -196,7 +195,7 @@ class PobieranieFakturApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\ExportInvoicesResponse',
@@ -210,7 +209,7 @@ class PobieranieFakturApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -249,7 +248,7 @@ class PobieranieFakturApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -268,8 +267,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsPostAsync(
         ?\NetSeven\KseF2Model\InvoiceExportRequest $invoice_export_request = null,
         string $contentType = self::contentTypes['apiV2InvoicesExportsPost'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2InvoicesExportsPostAsyncWithHttpInfo($invoice_export_request, $contentType)
             ->then(
                 function ($response) {
@@ -292,8 +290,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsPostAsyncWithHttpInfo(
         ?\NetSeven\KseF2Model\InvoiceExportRequest $invoice_export_request = null,
         string $contentType = self::contentTypes['apiV2InvoicesExportsPost'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\ExportInvoicesResponse';
         $request = $this->apiV2InvoicesExportsPostRequest($invoice_export_request, $contentType);
 
@@ -345,8 +342,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsPostRequest(
         ?\NetSeven\KseF2Model\InvoiceExportRequest $invoice_export_request = null,
         string $contentType = self::contentTypes['apiV2InvoicesExportsPost'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -362,7 +358,7 @@ class PobieranieFakturApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -389,7 +385,6 @@ class PobieranieFakturApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -440,8 +435,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsReferenceNumberGet(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2InvoicesExportsReferenceNumberGet'][0]
-    ): \NetSeven\KseF2Model\InvoiceExportStatusResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\InvoiceExportStatusResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2InvoicesExportsReferenceNumberGetWithHttpInfo($reference_number, $contentType);
         return $response;
     }
@@ -461,8 +455,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsReferenceNumberGetWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2InvoicesExportsReferenceNumberGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2InvoicesExportsReferenceNumberGetRequest($reference_number, $contentType);
 
         try {
@@ -487,7 +480,7 @@ class PobieranieFakturApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\InvoiceExportStatusResponse',
@@ -501,7 +494,7 @@ class PobieranieFakturApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -540,7 +533,7 @@ class PobieranieFakturApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -559,8 +552,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsReferenceNumberGetAsync(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2InvoicesExportsReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2InvoicesExportsReferenceNumberGetAsyncWithHttpInfo($reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -583,8 +575,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsReferenceNumberGetAsyncWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2InvoicesExportsReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\InvoiceExportStatusResponse';
         $request = $this->apiV2InvoicesExportsReferenceNumberGetRequest($reference_number, $contentType);
 
@@ -636,8 +627,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesExportsReferenceNumberGetRequest(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2InvoicesExportsReferenceNumberGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -651,7 +641,7 @@ class PobieranieFakturApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling PobieranieFakturApi.apiV2InvoicesExportsReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/invoices/exports/{referenceNumber}';
         $formParams = [];
@@ -673,7 +663,7 @@ class PobieranieFakturApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -693,7 +683,6 @@ class PobieranieFakturApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -744,8 +733,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesKsefKsefNumberGet(
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2InvoicesKsefKsefNumberGet'][0]
-    ): string|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): string|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2InvoicesKsefKsefNumberGetWithHttpInfo($ksef_number, $contentType);
         return $response;
     }
@@ -765,8 +753,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesKsefKsefNumberGetWithHttpInfo(
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2InvoicesKsefKsefNumberGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2InvoicesKsefKsefNumberGetRequest($ksef_number, $contentType);
 
         try {
@@ -791,7 +778,7 @@ class PobieranieFakturApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         'string',
@@ -805,7 +792,7 @@ class PobieranieFakturApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -844,7 +831,7 @@ class PobieranieFakturApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -863,8 +850,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesKsefKsefNumberGetAsync(
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2InvoicesKsefKsefNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2InvoicesKsefKsefNumberGetAsyncWithHttpInfo($ksef_number, $contentType)
             ->then(
                 function ($response) {
@@ -887,8 +873,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesKsefKsefNumberGetAsyncWithHttpInfo(
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2InvoicesKsefKsefNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'string';
         $request = $this->apiV2InvoicesKsefKsefNumberGetRequest($ksef_number, $contentType);
 
@@ -940,8 +925,7 @@ class PobieranieFakturApi
     public function apiV2InvoicesKsefKsefNumberGetRequest(
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2InvoicesKsefKsefNumberGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'ksef_number' is set
         if ($ksef_number === null || (is_array($ksef_number) && count($ksef_number) === 0)) {
@@ -958,7 +942,7 @@ class PobieranieFakturApi
         if (!preg_match("/^([1-9](\\d[1-9]|[1-9]\\d)\\d{7})-(20[2-9][0-9]|2[1-9]\\d{2}|[3-9]\\d{3})(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])-([0-9A-F]{6})-?([0-9A-F]{6})-([0-9A-F]{2})$/", $ksef_number)) {
             throw new InvalidArgumentException("invalid value for \"ksef_number\" when calling PobieranieFakturApi.apiV2InvoicesKsefKsefNumberGet, must conform to the pattern /^([1-9](\\d[1-9]|[1-9]\\d)\\d{7})-(20[2-9][0-9]|2[1-9]\\d{2}|[3-9]\\d{3})(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])-([0-9A-F]{6})-?([0-9A-F]{6})-([0-9A-F]{2})$/.");
         }
-        
+
 
         $resourcePath = '/api/v2/invoices/ksef/{ksefNumber}';
         $formParams = [];
@@ -980,7 +964,7 @@ class PobieranieFakturApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/xml', 'application/json', ],
+            ['application/xml', 'application/json',],
             $contentType,
             $multipart
         );
@@ -1000,7 +984,6 @@ class PobieranieFakturApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1041,7 +1024,7 @@ class PobieranieFakturApi
      *
      * Pobranie listy metadanych faktur
      *
-     * @param  \NetSevenKseF2ModelSortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
+     * @param  \NetSeven\KseF2Model\SortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
      * @param  int|null $page_offset Indeks pierwszej strony wyników (0 &#x3D; pierwsza strona). (optional, default to 0)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  \NetSeven\KseF2Model\InvoiceQueryFilters|null $invoice_query_filters Kryteria filtrowania. (optional)
@@ -1052,13 +1035,12 @@ class PobieranieFakturApi
      * @return \NetSeven\KseF2Model\QueryInvoicesMetadataResponse|\NetSeven\KseF2Model\ExceptionResponse
      */
     public function apiV2InvoicesQueryMetadataPost(
-        ?\NetSevenKseF2ModelSortOrder $sort_order = null,
+        ?\NetSeven\KseF2Model\SortOrder $sort_order = null,
         ?int $page_offset = 0,
         ?int $page_size = 10,
         ?\NetSeven\KseF2Model\InvoiceQueryFilters $invoice_query_filters = null,
         string $contentType = self::contentTypes['apiV2InvoicesQueryMetadataPost'][0]
-    ): \NetSeven\KseF2Model\QueryInvoicesMetadataResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\QueryInvoicesMetadataResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2InvoicesQueryMetadataPostWithHttpInfo($sort_order, $page_offset, $page_size, $invoice_query_filters, $contentType);
         return $response;
     }
@@ -1068,7 +1050,7 @@ class PobieranieFakturApi
      *
      * Pobranie listy metadanych faktur
      *
-     * @param  \NetSevenKseF2ModelSortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
+     * @param  \NetSeven\KseF2Model\SortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
      * @param  int|null $page_offset Indeks pierwszej strony wyników (0 &#x3D; pierwsza strona). (optional, default to 0)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  \NetSeven\KseF2Model\InvoiceQueryFilters|null $invoice_query_filters Kryteria filtrowania. (optional)
@@ -1079,13 +1061,12 @@ class PobieranieFakturApi
      * @return array of \NetSeven\KseF2Model\QueryInvoicesMetadataResponse|\NetSeven\KseF2Model\ExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2InvoicesQueryMetadataPostWithHttpInfo(
-        ?\NetSevenKseF2ModelSortOrder $sort_order = null,
+        ?\NetSeven\KseF2Model\SortOrder $sort_order = null,
         ?int $page_offset = 0,
         ?int $page_size = 10,
         ?\NetSeven\KseF2Model\InvoiceQueryFilters $invoice_query_filters = null,
         string $contentType = self::contentTypes['apiV2InvoicesQueryMetadataPost'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2InvoicesQueryMetadataPostRequest($sort_order, $page_offset, $page_size, $invoice_query_filters, $contentType);
 
         try {
@@ -1110,7 +1091,7 @@ class PobieranieFakturApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\QueryInvoicesMetadataResponse',
@@ -1124,7 +1105,7 @@ class PobieranieFakturApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -1163,7 +1144,7 @@ class PobieranieFakturApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -1173,7 +1154,7 @@ class PobieranieFakturApi
      *
      * Pobranie listy metadanych faktur
      *
-     * @param  \NetSevenKseF2ModelSortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
+     * @param  \NetSeven\KseF2Model\SortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
      * @param  int|null $page_offset Indeks pierwszej strony wyników (0 &#x3D; pierwsza strona). (optional, default to 0)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  \NetSeven\KseF2Model\InvoiceQueryFilters|null $invoice_query_filters Kryteria filtrowania. (optional)
@@ -1183,13 +1164,12 @@ class PobieranieFakturApi
      * @return PromiseInterface
      */
     public function apiV2InvoicesQueryMetadataPostAsync(
-        ?\NetSevenKseF2ModelSortOrder $sort_order = null,
+        ?\NetSeven\KseF2Model\SortOrder $sort_order = null,
         ?int $page_offset = 0,
         ?int $page_size = 10,
         ?\NetSeven\KseF2Model\InvoiceQueryFilters $invoice_query_filters = null,
         string $contentType = self::contentTypes['apiV2InvoicesQueryMetadataPost'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2InvoicesQueryMetadataPostAsyncWithHttpInfo($sort_order, $page_offset, $page_size, $invoice_query_filters, $contentType)
             ->then(
                 function ($response) {
@@ -1203,7 +1183,7 @@ class PobieranieFakturApi
      *
      * Pobranie listy metadanych faktur
      *
-     * @param  \NetSevenKseF2ModelSortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
+     * @param  \NetSeven\KseF2Model\SortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
      * @param  int|null $page_offset Indeks pierwszej strony wyników (0 &#x3D; pierwsza strona). (optional, default to 0)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  \NetSeven\KseF2Model\InvoiceQueryFilters|null $invoice_query_filters Kryteria filtrowania. (optional)
@@ -1213,13 +1193,12 @@ class PobieranieFakturApi
      * @return PromiseInterface
      */
     public function apiV2InvoicesQueryMetadataPostAsyncWithHttpInfo(
-        ?\NetSevenKseF2ModelSortOrder $sort_order = null,
+        ?\NetSeven\KseF2Model\SortOrder $sort_order = null,
         ?int $page_offset = 0,
         ?int $page_size = 10,
         ?\NetSeven\KseF2Model\InvoiceQueryFilters $invoice_query_filters = null,
         string $contentType = self::contentTypes['apiV2InvoicesQueryMetadataPost'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\QueryInvoicesMetadataResponse';
         $request = $this->apiV2InvoicesQueryMetadataPostRequest($sort_order, $page_offset, $page_size, $invoice_query_filters, $contentType);
 
@@ -1262,7 +1241,7 @@ class PobieranieFakturApi
     /**
      * Create request for operation 'apiV2InvoicesQueryMetadataPost'
      *
-     * @param  \NetSevenKseF2ModelSortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
+     * @param  \NetSeven\KseF2Model\SortOrder|null $sort_order Kolejność sortowania wyników. | Wartość | Opis | | --- | --- | | Asc | Sortowanie rosnąco. | | Desc | Sortowanie malejąco. | (optional)
      * @param  int|null $page_offset Indeks pierwszej strony wyników (0 &#x3D; pierwsza strona). (optional, default to 0)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  \NetSeven\KseF2Model\InvoiceQueryFilters|null $invoice_query_filters Kryteria filtrowania. (optional)
@@ -1272,26 +1251,25 @@ class PobieranieFakturApi
      * @return \GuzzleHttp\Psr7\Request
      */
     public function apiV2InvoicesQueryMetadataPostRequest(
-        ?\NetSevenKseF2ModelSortOrder $sort_order = null,
+        ?\NetSeven\KseF2Model\SortOrder $sort_order = null,
         ?int $page_offset = 0,
         ?int $page_size = 10,
         ?\NetSeven\KseF2Model\InvoiceQueryFilters $invoice_query_filters = null,
         string $contentType = self::contentTypes['apiV2InvoicesQueryMetadataPost'][0]
-    ): Request
-    {
+    ): Request {
 
 
         if ($page_offset !== null && $page_offset < 0) {
             throw new InvalidArgumentException('invalid value for "$page_offset" when calling PobieranieFakturApi.apiV2InvoicesQueryMetadataPost, must be bigger than or equal to 0.');
         }
-        
+
         if ($page_size !== null && $page_size > 250) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling PobieranieFakturApi.apiV2InvoicesQueryMetadataPost, must be smaller than or equal to 250.');
         }
         if ($page_size !== null && $page_size < 10) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling PobieranieFakturApi.apiV2InvoicesQueryMetadataPost, must be bigger than or equal to 10.');
         }
-        
+
 
 
         $resourcePath = '/api/v2/invoices/query/metadata';
@@ -1333,7 +1311,7 @@ class PobieranieFakturApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1360,7 +1338,6 @@ class PobieranieFakturApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1452,8 +1429,8 @@ class PobieranieFakturApi
         string $rangeCode,
         int $statusCode,
     ): bool {
-        $left = (int) ($rangeCode[0].'00');
-        $right = (int) ($rangeCode[0].'99');
+        $left = (int) ($rangeCode[0] . '00');
+        $right = (int) ($rangeCode[0] . '99');
 
         return $statusCode >= $left && $statusCode <= $right;
     }

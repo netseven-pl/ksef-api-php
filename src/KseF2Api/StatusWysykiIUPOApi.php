@@ -1,4 +1,5 @@
 <?php
+
 /**
  * StatusWysykiIUPOApi
  * PHP version 8.1
@@ -151,7 +152,7 @@ class StatusWysykiIUPOApi
      *
      * Pobranie listy sesji
      *
-     * @param  \NetSevenKseF2ModelSessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
+     * @param  \NetSeven\KseF2Model\SessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
      * @param  int|null $page_size Rozmiar strony. (optional, default to 10)
      * @param  string|null $reference_number Numer referencyjny sesji. (optional)
      * @param  \DateTime|null $date_created_from Data utworzenia sesji (od). (optional)
@@ -169,7 +170,7 @@ class StatusWysykiIUPOApi
      * @return \NetSeven\KseF2Model\SessionsQueryResponse|\NetSeven\KseF2Model\ExceptionResponse
      */
     public function apiV2SessionsGet(
-        \NetSevenKseF2ModelSessionType $session_type,
+        \NetSeven\KseF2Model\SessionType $session_type,
         ?int $page_size = 10,
         ?string $reference_number = null,
         ?\DateTime $date_created_from = null,
@@ -181,8 +182,7 @@ class StatusWysykiIUPOApi
         ?array $statuses = null,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2SessionsGet'][0]
-    ): \NetSeven\KseF2Model\SessionsQueryResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\SessionsQueryResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsGetWithHttpInfo($session_type, $page_size, $reference_number, $date_created_from, $date_created_to, $date_closed_from, $date_closed_to, $date_modified_from, $date_modified_to, $statuses, $x_continuation_token, $contentType);
         return $response;
     }
@@ -192,7 +192,7 @@ class StatusWysykiIUPOApi
      *
      * Pobranie listy sesji
      *
-     * @param  \NetSevenKseF2ModelSessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
+     * @param  \NetSeven\KseF2Model\SessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
      * @param  int|null $page_size Rozmiar strony. (optional, default to 10)
      * @param  string|null $reference_number Numer referencyjny sesji. (optional)
      * @param  \DateTime|null $date_created_from Data utworzenia sesji (od). (optional)
@@ -210,7 +210,7 @@ class StatusWysykiIUPOApi
      * @return array of \NetSeven\KseF2Model\SessionsQueryResponse|\NetSeven\KseF2Model\ExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function apiV2SessionsGetWithHttpInfo(
-        \NetSevenKseF2ModelSessionType $session_type,
+        \NetSeven\KseF2Model\SessionType $session_type,
         ?int $page_size = 10,
         ?string $reference_number = null,
         ?\DateTime $date_created_from = null,
@@ -222,8 +222,7 @@ class StatusWysykiIUPOApi
         ?array $statuses = null,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2SessionsGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsGetRequest($session_type, $page_size, $reference_number, $date_created_from, $date_created_to, $date_closed_from, $date_closed_to, $date_modified_from, $date_modified_to, $statuses, $x_continuation_token, $contentType);
 
         try {
@@ -248,7 +247,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\SessionsQueryResponse',
@@ -262,7 +261,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -301,7 +300,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -311,7 +310,7 @@ class StatusWysykiIUPOApi
      *
      * Pobranie listy sesji
      *
-     * @param  \NetSevenKseF2ModelSessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
+     * @param  \NetSeven\KseF2Model\SessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
      * @param  int|null $page_size Rozmiar strony. (optional, default to 10)
      * @param  string|null $reference_number Numer referencyjny sesji. (optional)
      * @param  \DateTime|null $date_created_from Data utworzenia sesji (od). (optional)
@@ -328,7 +327,7 @@ class StatusWysykiIUPOApi
      * @return PromiseInterface
      */
     public function apiV2SessionsGetAsync(
-        \NetSevenKseF2ModelSessionType $session_type,
+        \NetSeven\KseF2Model\SessionType $session_type,
         ?int $page_size = 10,
         ?string $reference_number = null,
         ?\DateTime $date_created_from = null,
@@ -340,8 +339,7 @@ class StatusWysykiIUPOApi
         ?array $statuses = null,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2SessionsGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsGetAsyncWithHttpInfo($session_type, $page_size, $reference_number, $date_created_from, $date_created_to, $date_closed_from, $date_closed_to, $date_modified_from, $date_modified_to, $statuses, $x_continuation_token, $contentType)
             ->then(
                 function ($response) {
@@ -355,7 +353,7 @@ class StatusWysykiIUPOApi
      *
      * Pobranie listy sesji
      *
-     * @param  \NetSevenKseF2ModelSessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
+     * @param  \NetSeven\KseF2Model\SessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
      * @param  int|null $page_size Rozmiar strony. (optional, default to 10)
      * @param  string|null $reference_number Numer referencyjny sesji. (optional)
      * @param  \DateTime|null $date_created_from Data utworzenia sesji (od). (optional)
@@ -372,7 +370,7 @@ class StatusWysykiIUPOApi
      * @return PromiseInterface
      */
     public function apiV2SessionsGetAsyncWithHttpInfo(
-        \NetSevenKseF2ModelSessionType $session_type,
+        \NetSeven\KseF2Model\SessionType $session_type,
         ?int $page_size = 10,
         ?string $reference_number = null,
         ?\DateTime $date_created_from = null,
@@ -384,8 +382,7 @@ class StatusWysykiIUPOApi
         ?array $statuses = null,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2SessionsGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\SessionsQueryResponse';
         $request = $this->apiV2SessionsGetRequest($session_type, $page_size, $reference_number, $date_created_from, $date_created_to, $date_closed_from, $date_closed_to, $date_modified_from, $date_modified_to, $statuses, $x_continuation_token, $contentType);
 
@@ -428,7 +425,7 @@ class StatusWysykiIUPOApi
     /**
      * Create request for operation 'apiV2SessionsGet'
      *
-     * @param  \NetSevenKseF2ModelSessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
+     * @param  \NetSeven\KseF2Model\SessionType $session_type Typ sesji. | Wartość | Opis | | --- | --- | | Online | Wysyłka interaktywna (pojedyncze faktury). | | Batch | Wysyłka wsadowa (paczka faktur). | (required)
      * @param  int|null $page_size Rozmiar strony. (optional, default to 10)
      * @param  string|null $reference_number Numer referencyjny sesji. (optional)
      * @param  \DateTime|null $date_created_from Data utworzenia sesji (od). (optional)
@@ -445,7 +442,7 @@ class StatusWysykiIUPOApi
      * @return \GuzzleHttp\Psr7\Request
      */
     public function apiV2SessionsGetRequest(
-        \NetSevenKseF2ModelSessionType $session_type,
+        \NetSeven\KseF2Model\SessionType $session_type,
         ?int $page_size = 10,
         ?string $reference_number = null,
         ?\DateTime $date_created_from = null,
@@ -457,8 +454,7 @@ class StatusWysykiIUPOApi
         ?array $statuses = null,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2SessionsGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'session_type' is set
         if ($session_type === null || (is_array($session_type) && count($session_type) === 0)) {
@@ -473,14 +469,14 @@ class StatusWysykiIUPOApi
         if ($page_size !== null && $page_size < 10) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling StatusWysykiIUPOApi.apiV2SessionsGet, must be bigger than or equal to 10.');
         }
-        
+
         if ($reference_number !== null && strlen($reference_number) > 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsGet, must be smaller than or equal to 36.');
         }
         if ($reference_number !== null && strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsGet, must be bigger than or equal to 36.');
         }
-        
+
 
 
 
@@ -596,7 +592,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -616,7 +612,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -667,8 +662,7 @@ class StatusWysykiIUPOApi
     public function apiV2SessionsReferenceNumberGet(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberGet'][0]
-    ): \NetSeven\KseF2Model\SessionStatusResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\SessionStatusResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberGetWithHttpInfo($reference_number, $contentType);
         return $response;
     }
@@ -688,8 +682,7 @@ class StatusWysykiIUPOApi
     public function apiV2SessionsReferenceNumberGetWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberGetRequest($reference_number, $contentType);
 
         try {
@@ -714,7 +707,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\SessionStatusResponse',
@@ -728,7 +721,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -767,7 +760,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -786,8 +779,7 @@ class StatusWysykiIUPOApi
     public function apiV2SessionsReferenceNumberGetAsync(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberGetAsyncWithHttpInfo($reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -810,8 +802,7 @@ class StatusWysykiIUPOApi
     public function apiV2SessionsReferenceNumberGetAsyncWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\SessionStatusResponse';
         $request = $this->apiV2SessionsReferenceNumberGetRequest($reference_number, $contentType);
 
@@ -863,8 +854,7 @@ class StatusWysykiIUPOApi
     public function apiV2SessionsReferenceNumberGetRequest(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -878,7 +868,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}';
         $formParams = [];
@@ -900,7 +890,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -920,7 +910,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -975,8 +964,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesFailedGet'][0]
-    ): \NetSeven\KseF2Model\SessionInvoicesResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\SessionInvoicesResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberInvoicesFailedGetWithHttpInfo($reference_number, $x_continuation_token, $page_size, $contentType);
         return $response;
     }
@@ -1000,8 +988,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesFailedGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberInvoicesFailedGetRequest($reference_number, $x_continuation_token, $page_size, $contentType);
 
         try {
@@ -1026,7 +1013,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\SessionInvoicesResponse',
@@ -1040,7 +1027,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -1079,7 +1066,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -1102,8 +1089,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesFailedGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberInvoicesFailedGetAsyncWithHttpInfo($reference_number, $x_continuation_token, $page_size, $contentType)
             ->then(
                 function ($response) {
@@ -1130,8 +1116,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesFailedGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\SessionInvoicesResponse';
         $request = $this->apiV2SessionsReferenceNumberInvoicesFailedGetRequest($reference_number, $x_continuation_token, $page_size, $contentType);
 
@@ -1187,8 +1172,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesFailedGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -1202,7 +1186,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesFailedGet, must be bigger than or equal to 36.');
         }
-        
+
 
         if ($page_size !== null && $page_size > 500) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesFailedGet, must be smaller than or equal to 500.');
@@ -1210,7 +1194,7 @@ class StatusWysykiIUPOApi
         if ($page_size !== null && $page_size < 10) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesFailedGet, must be bigger than or equal to 10.');
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}/invoices/failed';
         $formParams = [];
@@ -1245,7 +1229,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1265,7 +1249,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1320,8 +1303,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesGet'][0]
-    ): \NetSeven\KseF2Model\SessionInvoicesResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\SessionInvoicesResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberInvoicesGetWithHttpInfo($reference_number, $x_continuation_token, $page_size, $contentType);
         return $response;
     }
@@ -1345,8 +1327,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberInvoicesGetRequest($reference_number, $x_continuation_token, $page_size, $contentType);
 
         try {
@@ -1371,7 +1352,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\SessionInvoicesResponse',
@@ -1385,7 +1366,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -1424,7 +1405,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -1447,8 +1428,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberInvoicesGetAsyncWithHttpInfo($reference_number, $x_continuation_token, $page_size, $contentType)
             ->then(
                 function ($response) {
@@ -1475,8 +1455,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\SessionInvoicesResponse';
         $request = $this->apiV2SessionsReferenceNumberInvoicesGetRequest($reference_number, $x_continuation_token, $page_size, $contentType);
 
@@ -1532,8 +1511,7 @@ class StatusWysykiIUPOApi
         ?string $x_continuation_token = null,
         ?int $page_size = 10,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -1547,7 +1525,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesGet, must be bigger than or equal to 36.');
         }
-        
+
 
         if ($page_size !== null && $page_size > 500) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesGet, must be smaller than or equal to 500.');
@@ -1555,7 +1533,7 @@ class StatusWysykiIUPOApi
         if ($page_size !== null && $page_size < 10) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesGet, must be bigger than or equal to 10.');
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}/invoices';
         $formParams = [];
@@ -1590,7 +1568,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1610,7 +1588,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1663,8 +1640,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet'][0]
-    ): \NetSeven\KseF2Model\SessionInvoiceStatusResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\SessionInvoiceStatusResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGetWithHttpInfo($reference_number, $invoice_reference_number, $contentType);
         return $response;
     }
@@ -1686,8 +1662,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGetRequest($reference_number, $invoice_reference_number, $contentType);
 
         try {
@@ -1712,7 +1687,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\SessionInvoiceStatusResponse',
@@ -1726,7 +1701,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -1765,7 +1740,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -1786,8 +1761,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGetAsyncWithHttpInfo($reference_number, $invoice_reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -1812,8 +1786,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\SessionInvoiceStatusResponse';
         $request = $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGetRequest($reference_number, $invoice_reference_number, $contentType);
 
@@ -1867,8 +1840,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -1882,7 +1854,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
         // verify the required parameter 'invoice_reference_number' is set
         if ($invoice_reference_number === null || (is_array($invoice_reference_number) && count($invoice_reference_number) === 0)) {
             throw new InvalidArgumentException(
@@ -1895,7 +1867,7 @@ class StatusWysykiIUPOApi
         if (strlen($invoice_reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$invoice_reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}/invoices/{invoiceReferenceNumber}';
         $formParams = [];
@@ -1925,7 +1897,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1945,7 +1917,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1998,8 +1969,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet'][0]
-    ): string|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): string|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGetWithHttpInfo($reference_number, $invoice_reference_number, $contentType);
         return $response;
     }
@@ -2021,8 +1991,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGetRequest($reference_number, $invoice_reference_number, $contentType);
 
         try {
@@ -2047,7 +2016,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         'string',
@@ -2061,7 +2030,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -2100,7 +2069,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -2121,8 +2090,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGetAsyncWithHttpInfo($reference_number, $invoice_reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -2147,8 +2115,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'string';
         $request = $this->apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGetRequest($reference_number, $invoice_reference_number, $contentType);
 
@@ -2202,8 +2169,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $invoice_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -2217,7 +2183,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet, must be bigger than or equal to 36.');
         }
-        
+
         // verify the required parameter 'invoice_reference_number' is set
         if ($invoice_reference_number === null || (is_array($invoice_reference_number) && count($invoice_reference_number) === 0)) {
             throw new InvalidArgumentException(
@@ -2230,7 +2196,7 @@ class StatusWysykiIUPOApi
         if (strlen($invoice_reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$invoice_reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesInvoiceReferenceNumberUpoGet, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}/invoices/{invoiceReferenceNumber}/upo';
         $formParams = [];
@@ -2260,7 +2226,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/xml', 'application/json', ],
+            ['application/xml', 'application/json',],
             $contentType,
             $multipart
         );
@@ -2280,7 +2246,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -2333,8 +2298,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet'][0]
-    ): string|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): string|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGetWithHttpInfo($reference_number, $ksef_number, $contentType);
         return $response;
     }
@@ -2356,8 +2320,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGetRequest($reference_number, $ksef_number, $contentType);
 
         try {
@@ -2382,7 +2345,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         'string',
@@ -2396,7 +2359,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -2435,7 +2398,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -2456,8 +2419,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGetAsyncWithHttpInfo($reference_number, $ksef_number, $contentType)
             ->then(
                 function ($response) {
@@ -2482,8 +2444,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'string';
         $request = $this->apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGetRequest($reference_number, $ksef_number, $contentType);
 
@@ -2537,8 +2498,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $ksef_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -2552,7 +2512,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet, must be bigger than or equal to 36.');
         }
-        
+
         // verify the required parameter 'ksef_number' is set
         if ($ksef_number === null || (is_array($ksef_number) && count($ksef_number) === 0)) {
             throw new InvalidArgumentException(
@@ -2568,7 +2528,7 @@ class StatusWysykiIUPOApi
         if (!preg_match("/^([1-9](\\d[1-9]|[1-9]\\d)\\d{7})-(20[2-9][0-9]|2[1-9]\\d{2}|[3-9]\\d{3})(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])-([0-9A-F]{6})-?([0-9A-F]{6})-([0-9A-F]{2})$/", $ksef_number)) {
             throw new InvalidArgumentException("invalid value for \"ksef_number\" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberInvoicesKsefKsefNumberUpoGet, must conform to the pattern /^([1-9](\\d[1-9]|[1-9]\\d)\\d{7})-(20[2-9][0-9]|2[1-9]\\d{2}|[3-9]\\d{3})(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])-([0-9A-F]{6})-?([0-9A-F]{6})-([0-9A-F]{2})$/.");
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}/invoices/ksef/{ksefNumber}/upo';
         $formParams = [];
@@ -2598,7 +2558,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/xml', 'application/json', ],
+            ['application/xml', 'application/json',],
             $contentType,
             $multipart
         );
@@ -2618,7 +2578,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -2671,8 +2630,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $upo_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet'][0]
-    ): string|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): string|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2SessionsReferenceNumberUpoUpoReferenceNumberGetWithHttpInfo($reference_number, $upo_reference_number, $contentType);
         return $response;
     }
@@ -2694,8 +2652,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $upo_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2SessionsReferenceNumberUpoUpoReferenceNumberGetRequest($reference_number, $upo_reference_number, $contentType);
 
         try {
@@ -2720,7 +2677,7 @@ class StatusWysykiIUPOApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         'string',
@@ -2734,7 +2691,7 @@ class StatusWysykiIUPOApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -2773,7 +2730,7 @@ class StatusWysykiIUPOApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -2794,8 +2751,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $upo_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2SessionsReferenceNumberUpoUpoReferenceNumberGetAsyncWithHttpInfo($reference_number, $upo_reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -2820,8 +2776,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $upo_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'string';
         $request = $this->apiV2SessionsReferenceNumberUpoUpoReferenceNumberGetRequest($reference_number, $upo_reference_number, $contentType);
 
@@ -2875,8 +2830,7 @@ class StatusWysykiIUPOApi
         string $reference_number,
         string $upo_reference_number,
         string $contentType = self::contentTypes['apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -2890,7 +2844,7 @@ class StatusWysykiIUPOApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
         // verify the required parameter 'upo_reference_number' is set
         if ($upo_reference_number === null || (is_array($upo_reference_number) && count($upo_reference_number) === 0)) {
             throw new InvalidArgumentException(
@@ -2903,7 +2857,7 @@ class StatusWysykiIUPOApi
         if (strlen($upo_reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$upo_reference_number" when calling StatusWysykiIUPOApi.apiV2SessionsReferenceNumberUpoUpoReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/sessions/{referenceNumber}/upo/{upoReferenceNumber}';
         $formParams = [];
@@ -2933,7 +2887,7 @@ class StatusWysykiIUPOApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/xml', 'application/json', ],
+            ['application/xml', 'application/json',],
             $contentType,
             $multipart
         );
@@ -2953,7 +2907,6 @@ class StatusWysykiIUPOApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -3045,8 +2998,8 @@ class StatusWysykiIUPOApi
         string $rangeCode,
         int $statusCode,
     ): bool {
-        $left = (int) ($rangeCode[0].'00');
-        $right = (int) ($rangeCode[0].'99');
+        $left = (int) ($rangeCode[0] . '00');
+        $right = (int) ($rangeCode[0] . '99');
 
         return $statusCode >= $left && $statusCode <= $right;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TokenyKSeFApi
  * PHP version 8.1
@@ -142,7 +143,7 @@ class TokenyKSeFApi
      * @param  \NetSeven\KseF2Model\AuthenticationTokenStatus[]|null $status Status tokenów do zwrócenia. W przypadku braku parametru zwracane są wszystkie tokeny. Parametr można przekazać wielokrotnie. | Wartość | Opis | | --- | --- | | Pending | Token został utworzony ale jest jeszcze w trakcie aktywacji i nadawania uprawnień. Nie może być jeszcze wykorzystywany do uwierzytelniania. | | Active | Token jest aktywny i może być wykorzystywany do uwierzytelniania. | | Revoking | Token jest w trakcie unieważniania. Nie może już być wykorzystywany do uwierzytelniania. | | Revoked | Token został unieważniony i nie może być wykorzystywany do uwierzytelniania. | | Failed | Nie udało się aktywować tokena. Należy wygenerować nowy token, obecny nie może być wykorzystywany do uwierzytelniania. | (optional)
      * @param  string|null $description Umożliwia filtrowanie tokenów po opisie. Wartość parametru jest wyszukiwana w opisie tokena (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
      * @param  string|null $author_identifier Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru jest wyszukiwana w identyfikatorze (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
-     * @param  \NetSevenKseF2ModelTokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
+     * @param  \NetSeven\KseF2Model\TokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  string|null $x_continuation_token Token służący do pobrania kolejnej strony wyników. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiV2TokensGet'] to see the possible values for this operation
@@ -155,12 +156,11 @@ class TokenyKSeFApi
         ?array $status = null,
         ?string $description = null,
         ?string $author_identifier = null,
-        ?\NetSevenKseF2ModelTokenAuthorIdentifierType $author_identifier_type = null,
+        ?\NetSeven\KseF2Model\TokenAuthorIdentifierType $author_identifier_type = null,
         ?int $page_size = 10,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2TokensGet'][0]
-    ): \NetSeven\KseF2Model\QueryTokensResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\QueryTokensResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2TokensGetWithHttpInfo($status, $description, $author_identifier, $author_identifier_type, $page_size, $x_continuation_token, $contentType);
         return $response;
     }
@@ -173,7 +173,7 @@ class TokenyKSeFApi
      * @param  \NetSeven\KseF2Model\AuthenticationTokenStatus[]|null $status Status tokenów do zwrócenia. W przypadku braku parametru zwracane są wszystkie tokeny. Parametr można przekazać wielokrotnie. | Wartość | Opis | | --- | --- | | Pending | Token został utworzony ale jest jeszcze w trakcie aktywacji i nadawania uprawnień. Nie może być jeszcze wykorzystywany do uwierzytelniania. | | Active | Token jest aktywny i może być wykorzystywany do uwierzytelniania. | | Revoking | Token jest w trakcie unieważniania. Nie może już być wykorzystywany do uwierzytelniania. | | Revoked | Token został unieważniony i nie może być wykorzystywany do uwierzytelniania. | | Failed | Nie udało się aktywować tokena. Należy wygenerować nowy token, obecny nie może być wykorzystywany do uwierzytelniania. | (optional)
      * @param  string|null $description Umożliwia filtrowanie tokenów po opisie. Wartość parametru jest wyszukiwana w opisie tokena (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
      * @param  string|null $author_identifier Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru jest wyszukiwana w identyfikatorze (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
-     * @param  \NetSevenKseF2ModelTokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
+     * @param  \NetSeven\KseF2Model\TokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  string|null $x_continuation_token Token służący do pobrania kolejnej strony wyników. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiV2TokensGet'] to see the possible values for this operation
@@ -186,12 +186,11 @@ class TokenyKSeFApi
         ?array $status = null,
         ?string $description = null,
         ?string $author_identifier = null,
-        ?\NetSevenKseF2ModelTokenAuthorIdentifierType $author_identifier_type = null,
+        ?\NetSeven\KseF2Model\TokenAuthorIdentifierType $author_identifier_type = null,
         ?int $page_size = 10,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2TokensGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2TokensGetRequest($status, $description, $author_identifier, $author_identifier_type, $page_size, $x_continuation_token, $contentType);
 
         try {
@@ -216,7 +215,7 @@ class TokenyKSeFApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\QueryTokensResponse',
@@ -230,7 +229,7 @@ class TokenyKSeFApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -269,7 +268,7 @@ class TokenyKSeFApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -282,7 +281,7 @@ class TokenyKSeFApi
      * @param  \NetSeven\KseF2Model\AuthenticationTokenStatus[]|null $status Status tokenów do zwrócenia. W przypadku braku parametru zwracane są wszystkie tokeny. Parametr można przekazać wielokrotnie. | Wartość | Opis | | --- | --- | | Pending | Token został utworzony ale jest jeszcze w trakcie aktywacji i nadawania uprawnień. Nie może być jeszcze wykorzystywany do uwierzytelniania. | | Active | Token jest aktywny i może być wykorzystywany do uwierzytelniania. | | Revoking | Token jest w trakcie unieważniania. Nie może już być wykorzystywany do uwierzytelniania. | | Revoked | Token został unieważniony i nie może być wykorzystywany do uwierzytelniania. | | Failed | Nie udało się aktywować tokena. Należy wygenerować nowy token, obecny nie może być wykorzystywany do uwierzytelniania. | (optional)
      * @param  string|null $description Umożliwia filtrowanie tokenów po opisie. Wartość parametru jest wyszukiwana w opisie tokena (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
      * @param  string|null $author_identifier Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru jest wyszukiwana w identyfikatorze (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
-     * @param  \NetSevenKseF2ModelTokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
+     * @param  \NetSeven\KseF2Model\TokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  string|null $x_continuation_token Token służący do pobrania kolejnej strony wyników. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiV2TokensGet'] to see the possible values for this operation
@@ -294,12 +293,11 @@ class TokenyKSeFApi
         ?array $status = null,
         ?string $description = null,
         ?string $author_identifier = null,
-        ?\NetSevenKseF2ModelTokenAuthorIdentifierType $author_identifier_type = null,
+        ?\NetSeven\KseF2Model\TokenAuthorIdentifierType $author_identifier_type = null,
         ?int $page_size = 10,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2TokensGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2TokensGetAsyncWithHttpInfo($status, $description, $author_identifier, $author_identifier_type, $page_size, $x_continuation_token, $contentType)
             ->then(
                 function ($response) {
@@ -316,7 +314,7 @@ class TokenyKSeFApi
      * @param  \NetSeven\KseF2Model\AuthenticationTokenStatus[]|null $status Status tokenów do zwrócenia. W przypadku braku parametru zwracane są wszystkie tokeny. Parametr można przekazać wielokrotnie. | Wartość | Opis | | --- | --- | | Pending | Token został utworzony ale jest jeszcze w trakcie aktywacji i nadawania uprawnień. Nie może być jeszcze wykorzystywany do uwierzytelniania. | | Active | Token jest aktywny i może być wykorzystywany do uwierzytelniania. | | Revoking | Token jest w trakcie unieważniania. Nie może już być wykorzystywany do uwierzytelniania. | | Revoked | Token został unieważniony i nie może być wykorzystywany do uwierzytelniania. | | Failed | Nie udało się aktywować tokena. Należy wygenerować nowy token, obecny nie może być wykorzystywany do uwierzytelniania. | (optional)
      * @param  string|null $description Umożliwia filtrowanie tokenów po opisie. Wartość parametru jest wyszukiwana w opisie tokena (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
      * @param  string|null $author_identifier Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru jest wyszukiwana w identyfikatorze (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
-     * @param  \NetSevenKseF2ModelTokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
+     * @param  \NetSeven\KseF2Model\TokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  string|null $x_continuation_token Token służący do pobrania kolejnej strony wyników. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiV2TokensGet'] to see the possible values for this operation
@@ -328,12 +326,11 @@ class TokenyKSeFApi
         ?array $status = null,
         ?string $description = null,
         ?string $author_identifier = null,
-        ?\NetSevenKseF2ModelTokenAuthorIdentifierType $author_identifier_type = null,
+        ?\NetSeven\KseF2Model\TokenAuthorIdentifierType $author_identifier_type = null,
         ?int $page_size = 10,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2TokensGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\QueryTokensResponse';
         $request = $this->apiV2TokensGetRequest($status, $description, $author_identifier, $author_identifier_type, $page_size, $x_continuation_token, $contentType);
 
@@ -379,7 +376,7 @@ class TokenyKSeFApi
      * @param  \NetSeven\KseF2Model\AuthenticationTokenStatus[]|null $status Status tokenów do zwrócenia. W przypadku braku parametru zwracane są wszystkie tokeny. Parametr można przekazać wielokrotnie. | Wartość | Opis | | --- | --- | | Pending | Token został utworzony ale jest jeszcze w trakcie aktywacji i nadawania uprawnień. Nie może być jeszcze wykorzystywany do uwierzytelniania. | | Active | Token jest aktywny i może być wykorzystywany do uwierzytelniania. | | Revoking | Token jest w trakcie unieważniania. Nie może już być wykorzystywany do uwierzytelniania. | | Revoked | Token został unieważniony i nie może być wykorzystywany do uwierzytelniania. | | Failed | Nie udało się aktywować tokena. Należy wygenerować nowy token, obecny nie może być wykorzystywany do uwierzytelniania. | (optional)
      * @param  string|null $description Umożliwia filtrowanie tokenów po opisie. Wartość parametru jest wyszukiwana w opisie tokena (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
      * @param  string|null $author_identifier Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru jest wyszukiwana w identyfikatorze (operacja nie rozróżnia wielkości liter). Należy podać co najmniej 3 znaki. (optional)
-     * @param  \NetSevenKseF2ModelTokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
+     * @param  \NetSeven\KseF2Model\TokenAuthorIdentifierType|null $author_identifier_type Umożliwia filtrowanie tokenów po ich twórcy. Wartość parametru określa typ identyfikatora w którym będzie wyszukiwany ciąg znaków przekazany w parametrze &#x60;authorIdentifier&#x60;. | Wartość | Opis | | --- | --- | | Nip | NIP. | | Pesel | PESEL. | | Fingerprint | Odcisk palca certyfikatu. | (optional)
      * @param  int|null $page_size Rozmiar strony wyników. (optional, default to 10)
      * @param  string|null $x_continuation_token Token służący do pobrania kolejnej strony wyników. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['apiV2TokensGet'] to see the possible values for this operation
@@ -391,22 +388,21 @@ class TokenyKSeFApi
         ?array $status = null,
         ?string $description = null,
         ?string $author_identifier = null,
-        ?\NetSevenKseF2ModelTokenAuthorIdentifierType $author_identifier_type = null,
+        ?\NetSeven\KseF2Model\TokenAuthorIdentifierType $author_identifier_type = null,
         ?int $page_size = 10,
         ?string $x_continuation_token = null,
         string $contentType = self::contentTypes['apiV2TokensGet'][0]
-    ): Request
-    {
+    ): Request {
 
 
         if ($description !== null && strlen($description) < 3) {
             throw new InvalidArgumentException('invalid length for "$description" when calling TokenyKSeFApi.apiV2TokensGet, must be bigger than or equal to 3.');
         }
-        
+
         if ($author_identifier !== null && strlen($author_identifier) < 3) {
             throw new InvalidArgumentException('invalid length for "$author_identifier" when calling TokenyKSeFApi.apiV2TokensGet, must be bigger than or equal to 3.');
         }
-        
+
 
         if ($page_size !== null && $page_size > 100) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling TokenyKSeFApi.apiV2TokensGet, must be smaller than or equal to 100.');
@@ -414,7 +410,7 @@ class TokenyKSeFApi
         if ($page_size !== null && $page_size < 10) {
             throw new InvalidArgumentException('invalid value for "$page_size" when calling TokenyKSeFApi.apiV2TokensGet, must be bigger than or equal to 10.');
         }
-        
+
 
 
         $resourcePath = '/api/v2/tokens';
@@ -478,7 +474,7 @@ class TokenyKSeFApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -498,7 +494,6 @@ class TokenyKSeFApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -549,8 +544,7 @@ class TokenyKSeFApi
     public function apiV2TokensPost(
         ?\NetSeven\KseF2Model\GenerateTokenRequest $generate_token_request = null,
         string $contentType = self::contentTypes['apiV2TokensPost'][0]
-    ): \NetSeven\KseF2Model\GenerateTokenResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\GenerateTokenResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2TokensPostWithHttpInfo($generate_token_request, $contentType);
         return $response;
     }
@@ -570,8 +564,7 @@ class TokenyKSeFApi
     public function apiV2TokensPostWithHttpInfo(
         ?\NetSeven\KseF2Model\GenerateTokenRequest $generate_token_request = null,
         string $contentType = self::contentTypes['apiV2TokensPost'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2TokensPostRequest($generate_token_request, $contentType);
 
         try {
@@ -596,7 +589,7 @@ class TokenyKSeFApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 202:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\GenerateTokenResponse',
@@ -610,7 +603,7 @@ class TokenyKSeFApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -649,7 +642,7 @@ class TokenyKSeFApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -668,8 +661,7 @@ class TokenyKSeFApi
     public function apiV2TokensPostAsync(
         ?\NetSeven\KseF2Model\GenerateTokenRequest $generate_token_request = null,
         string $contentType = self::contentTypes['apiV2TokensPost'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2TokensPostAsyncWithHttpInfo($generate_token_request, $contentType)
             ->then(
                 function ($response) {
@@ -692,8 +684,7 @@ class TokenyKSeFApi
     public function apiV2TokensPostAsyncWithHttpInfo(
         ?\NetSeven\KseF2Model\GenerateTokenRequest $generate_token_request = null,
         string $contentType = self::contentTypes['apiV2TokensPost'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\GenerateTokenResponse';
         $request = $this->apiV2TokensPostRequest($generate_token_request, $contentType);
 
@@ -745,8 +736,7 @@ class TokenyKSeFApi
     public function apiV2TokensPostRequest(
         ?\NetSeven\KseF2Model\GenerateTokenRequest $generate_token_request = null,
         string $contentType = self::contentTypes['apiV2TokensPost'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -762,7 +752,7 @@ class TokenyKSeFApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -789,7 +779,6 @@ class TokenyKSeFApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -840,8 +829,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberDelete(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberDelete'][0]
-    ): \NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2TokensReferenceNumberDeleteWithHttpInfo($reference_number, $contentType);
         return $response;
     }
@@ -861,8 +849,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberDeleteWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberDelete'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2TokensReferenceNumberDeleteRequest($reference_number, $contentType);
 
         try {
@@ -900,7 +887,7 @@ class TokenyKSeFApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -919,8 +906,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberDeleteAsync(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberDelete'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2TokensReferenceNumberDeleteAsyncWithHttpInfo($reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -943,8 +929,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberDeleteAsyncWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberDelete'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '';
         $request = $this->apiV2TokensReferenceNumberDeleteRequest($reference_number, $contentType);
 
@@ -983,8 +968,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberDeleteRequest(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberDelete'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -998,7 +982,7 @@ class TokenyKSeFApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling TokenyKSeFApi.apiV2TokensReferenceNumberDelete, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/tokens/{referenceNumber}';
         $formParams = [];
@@ -1020,7 +1004,7 @@ class TokenyKSeFApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1040,7 +1024,6 @@ class TokenyKSeFApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1091,8 +1074,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberGet(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberGet'][0]
-    ): \NetSeven\KseF2Model\TokenStatusResponse|\NetSeven\KseF2Model\ExceptionResponse
-    {
+    ): \NetSeven\KseF2Model\TokenStatusResponse|\NetSeven\KseF2Model\ExceptionResponse {
         list($response) = $this->apiV2TokensReferenceNumberGetWithHttpInfo($reference_number, $contentType);
         return $response;
     }
@@ -1112,8 +1094,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberGetWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberGet'][0]
-    ): array
-    {
+    ): array {
         $request = $this->apiV2TokensReferenceNumberGetRequest($reference_number, $contentType);
 
         try {
@@ -1138,7 +1119,7 @@ class TokenyKSeFApi
 
             $statusCode = $response->getStatusCode();
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
                         '\NetSeven\KseF2Model\TokenStatusResponse',
@@ -1152,7 +1133,7 @@ class TokenyKSeFApi
                         $response,
                     );
             }
-            
+
 
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
@@ -1191,7 +1172,7 @@ class TokenyKSeFApi
                     $e->setResponseObject($data);
                     throw $e;
             }
-        
+
             throw $e;
         }
     }
@@ -1210,8 +1191,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberGetAsync(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->apiV2TokensReferenceNumberGetAsyncWithHttpInfo($reference_number, $contentType)
             ->then(
                 function ($response) {
@@ -1234,8 +1214,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberGetAsyncWithHttpInfo(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberGet'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\NetSeven\KseF2Model\TokenStatusResponse';
         $request = $this->apiV2TokensReferenceNumberGetRequest($reference_number, $contentType);
 
@@ -1287,8 +1266,7 @@ class TokenyKSeFApi
     public function apiV2TokensReferenceNumberGetRequest(
         string $reference_number,
         string $contentType = self::contentTypes['apiV2TokensReferenceNumberGet'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'reference_number' is set
         if ($reference_number === null || (is_array($reference_number) && count($reference_number) === 0)) {
@@ -1302,7 +1280,7 @@ class TokenyKSeFApi
         if (strlen($reference_number) < 36) {
             throw new InvalidArgumentException('invalid length for "$reference_number" when calling TokenyKSeFApi.apiV2TokensReferenceNumberGet, must be bigger than or equal to 36.');
         }
-        
+
 
         $resourcePath = '/api/v2/tokens/{referenceNumber}';
         $formParams = [];
@@ -1324,7 +1302,7 @@ class TokenyKSeFApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json',],
             $contentType,
             $multipart
         );
@@ -1344,7 +1322,6 @@ class TokenyKSeFApi
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
                 $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
@@ -1436,8 +1413,8 @@ class TokenyKSeFApi
         string $rangeCode,
         int $statusCode,
     ): bool {
-        $left = (int) ($rangeCode[0].'00');
-        $right = (int) ($rangeCode[0].'99');
+        $left = (int) ($rangeCode[0] . '00');
+        $right = (int) ($rangeCode[0] . '99');
 
         return $statusCode >= $left && $statusCode <= $right;
     }
